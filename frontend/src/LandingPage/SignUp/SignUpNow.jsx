@@ -19,7 +19,7 @@ function SignUpNow() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8080/signup",
+        "https://zerodha-clone-1-backend.onrender.com/signup",
         formData
       );
       const token = response.data?.token;
