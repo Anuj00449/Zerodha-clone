@@ -12,7 +12,7 @@ const Holdings = () => {
     const token = localStorage.getItem("token");
 
     axios
-      .get("http://localhost:8080/holdings", {
+      .get("https://zerodha-clone-1-backend.onrender.com/holdings", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
