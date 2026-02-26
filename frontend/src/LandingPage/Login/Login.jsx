@@ -1,0 +1,86 @@
+import React, { useState } from "react";
+import axios from "axios";
+import "./Login.css";
+
+function Login() {
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    axios
+      .post("http://localhost:8080/login", formData)
+      .then((response) => {
+        const token = response.data.token;
+        window.location.href = ` http://localhost:5173/?token=${token}`;
+      })
+      .catch((error) => {
+        console.error("Login failed", error);
+      });
+  };
+
+  return (
+    <div className="container" style={{ marginTop: "5rem" }}>
+      <div className="row">
+        <div className="col">
+          <img
+            style={{ width: "80%", marginLeft: "10rem", marginTop: "5rem" }}
+            src="/Media/image/signup.png"
+            alt="signin image"
+          />
+        </div>
+        <div className="col" style={{ marginLeft: "5rem" }}>
+          <div style={{ marginTop: "5rem" }}>
+            <h2 style={{ marginBottom: "2rem" }}>Signin</h2>
+            <form onSubmit={handleSubmit} className="Login-form">
+              <div className="input-group mb-3">
+                <span className="input-group-text" id="basic-addon1">
+                  @
+                </span>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="username"
+                  placeholder="Username"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  value={formData.username}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="input-group mb-3">
+                <input
+                  type="password"
+                  className="form-control"
+                  name="password"
+                  placeholder="Password"
+                  aria-label="password"
+                  aria-describedby="basic-addon1"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+              </div>
+              <button type="submit" className="btn btn-outline-primary">
+                Sign in
+              </button>
+            </form>
+            {error && <p className="error">{error}</p>}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Login;
