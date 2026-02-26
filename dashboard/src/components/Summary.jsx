@@ -30,7 +30,7 @@ const Summary = () => {
     }
 
     axios
-      .get("http://localhost:8080/profile", {
+      .get("https://zerodha-clone-1-backend.onrender.com/profile", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
