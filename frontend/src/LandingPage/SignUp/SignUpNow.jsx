@@ -28,7 +28,7 @@ function SignUpNow() {
         return;
       }
       localStorage.setItem("token", token); 
-      window.location.href = ` http://localhost:5173/?token=${token}`;
+      window.location.href = ` https://zerodha-clone-2-frontend.onrender.com/?token=${token}`;
     } catch (err) {
       alert(err.response?.data?.message || "Signup failed");
     }
